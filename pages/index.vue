@@ -192,7 +192,7 @@
           </div>
           <div class="member-info">
             Mestre pela Harvard University e pelo Massachusetts Institute of
-            Technology(MIT), é responsável pela estratégia e
+            Technology (MIT), é responsável pela estratégia e
             internacionalização, pelas novas tecnologias e negócios.
           </div>
         </v-col>
@@ -214,9 +214,10 @@
             da Web3.
           </p>
           <a
-            href="https://discord.gg/cFyut8Asr8"
+            href=""
             target="_blank"
             class="white--text link"
+            @click="downloadFile('/litepaper.pdf')"
             >Sabe mais sobre a Comunidade MGN
             <IconArrowForward></IconArrowForward>
           </a>
@@ -255,17 +256,19 @@
               max-width="206"
               :src="require(`assets/images/icon-token.webp`)"
             ></v-img>
-            <h4 class="mb-5 font-weight-bold">Espetadores de cinema</h4>
+            <h4 class="mb-5 font-weight-bold">Espectadores de cinema</h4>
             <p class="normal-text mb-10">
               Podem ser membros da Comunidade todos os que tenham assistido a um
               filme da MGN nas salas de cinema a partir de 1 de outubro de 2022.
               Para isso basta enviar o bilhete de cinema e solicitar o $MGN
               token a que tem direito.
             </p>
-            <v-btn class="action-btn mt-3" :ripple="false" color="#242424">
-              RECEBE MGN TOKENS
-              <IconArrowDown class="ml-2"> </IconArrowDown>
-            </v-btn>
+            <nuxt-link class="" :to="{ path: '', hash: '#tokens' }">
+              <v-btn class="action-btn mt-3" :ripple="false" color="#242424">
+                RECEBE MGN TOKENS
+                <IconArrowDown class="ml-2"> </IconArrowDown>
+              </v-btn>
+            </nuxt-link>
           </div>
         </v-col>
         <v-col cols="12" sm="6" md="6" class="card text-center">
@@ -289,7 +292,7 @@
             </p>
             <a href="https://discord.gg/cFyut8Asr8" target="_blank">
               <v-btn class="action-btn mb-5" :ripple="false" color="#242424">
-                FALE CONNOSCO PELO DISCORD
+                FALA CONNOSCO PELO DISCORD
               </v-btn>
             </a>
             <p class="info-message">
@@ -383,18 +386,26 @@
               <v-btn
                 class="action-btn inverse mb-5 mr-5 mt-2"
                 :ripple="false"
-                @click="connectWallet()"
+                @click="openConnectModal()"
               >
                 LIGA À TUA CARTEIRA
               </v-btn>
               <p class="normal-text">
                 Não tens uma carteira digital? <br />
-                <a href="" target="_blank" class="link" style="color: #8888fd">
+                <a
+                  href=""
+                  target="_blank"
+                  class="link"
+                  style="color: #8888fd"
+                  @click="startOnboarding()"
+                >
                   Instala aqui
                 </a>
               </p>
             </div>
-            <div v-else>{{ account | truncate(16) }}</div>
+            <div v-else>
+              <JazzIcon :account="account" :id="'form'"> </JazzIcon>
+            </div>
           </div>
           <div class="d-flex pt-10">
             <IconStep2 class="mr-3" style="flex: 0 0 auto" />
@@ -403,43 +414,30 @@
             </h4>
           </div>
           <div class="d-flex pl-11 pt-7">
-            <v-text-field v-model="location" color="#242424"> </v-text-field>
+            <v-text-field
+              v-model="location"
+              color="#242424"
+              placeholder="Sala de cinema/localidade"
+            >
+            </v-text-field>
           </div>
           <div class="d-flex pt-10">
             <IconStep3 class="mr-3" style="flex: 0 0 auto" />
-            <h4>Faz upload de uma fotografia do bilhete do teu filme:</h4>
+            <h4>
+              Faz upload de uma fotografia do teu bilhete e submete a tua
+              informação:
+            </h4>
           </div>
           <div class="d-flex align-center pl-11 py-7">
             <v-btn
-              class="action-btn inverse mr-5 mt-0"
+              class="action-btn inverse mb-5"
+              :disabled="isMintDisabled"
               :ripple="false"
-              @click="$refs['ticket-upload'].click()"
+              @click="submit()"
             >
-              UPLOAD
+              Submete aqui
             </v-btn>
-            <p
-              class="normal-text mb-0"
-              :style="{ color: '#6b6b6b' }"
-              data-js-label
-            >
-              {{ uploadedTicketName | truncate(28) }}
-            </p>
-            <input
-              id="ticket-upload"
-              ref="ticket-upload"
-              type="file"
-              style="visibility: hidden; width: 0px; height: 0px"
-              @change="handleTicketUpload()"
-            />
           </div>
-          <v-btn
-            class="action-btn inverse mb-5"
-            :disabled="isMintDisabled"
-            :ripple="false"
-            @change="submit()"
-          >
-            RECEBE MGN TOKENS
-          </v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -474,7 +472,7 @@
                 target="_blank"
                 class="link"
                 style="color: #8888fd"
-                @click="downloadFile('/mgn-website/litepaper.pdf')"
+                @click="downloadFile('/litepaper.pdf')"
               >
                 aqui</a
               >.
@@ -502,12 +500,13 @@
       v-if="showVideoPlayerModal"
       @close="showVideoPlayerModal = false"
     />
-    <NetworkModal v-if="showNetworkModal" @close="showNetworkModal = false" />
+    <ConnectModal v-if="showConnectModal" @close="showConnectModal = false" />
   </v-container>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import MetaMaskOnboarding from '@metamask/onboarding'
 
 import OwlCarousel from 'vue-owl-carousel'
 import IconArrowForward from '../assets/svg/icon-arrow-forward.vue'
@@ -518,7 +517,7 @@ import IconStep3 from '../assets/svg/icon-step3.vue'
 import IconArrowDown from '~/assets/svg/icon-arrow-down.vue'
 import IconPlay from '~/assets/svg/icon-play.vue'
 import VideoPlayerModal from '~/modals/video-player-modal.vue'
-import NetworkModal from '~/modals/network-modal.vue'
+import ConnectModal from '~/modals/connect-modal.vue'
 
 export default {
   name: 'IndexPage',
@@ -531,8 +530,8 @@ export default {
     IconStep2,
     IconStep3,
     VideoPlayerModal,
-    NetworkModal,
     IconStepCheck,
+    ConnectModal,
   },
 
   data() {
@@ -562,7 +561,7 @@ export default {
       premierDate: '2022-10-05T22:00:00Z',
       hasBeenReleased: false,
       showVideoPlayerModal: false,
-      showNetworkModal: false,
+      showConnectModal: false,
       settings: {
         loop: true,
         stagePadding: 100,
@@ -602,7 +601,7 @@ export default {
   computed: {
     ...mapState(['account']),
     isMintDisabled() {
-      return !(this.location && this.uploadedTicket)
+      return !(this.location && this.account)
     },
   },
   mounted() {
@@ -614,10 +613,19 @@ export default {
     }
   },
   methods: {
+    startOnboarding() {
+      const onboarding = new MetaMaskOnboarding()
+      onboarding.startOnboarding()
+    },
     downloadFile(file) {
       window.open(file)
     },
-    submit() {},
+    submit() {
+      const preflledURL = (address, location) =>
+        `https://docs.google.com/forms/d/e/1FAIpQLSfMPZXdIHZv9zQ61GHgRShuqB3lzMY3CnuqVn24k-_hQg7OJA/viewform?usp=pp_url&entry.1538976001=${address}&entry.1021803014=${location}`
+
+      window.open(preflledURL(this.account, this.location), '_blank')
+    },
     handleTicketUpload() {
       const file = this.$refs['ticket-upload']?.files?.[0]
       this.uploadedTicketName = file?.name
@@ -625,15 +633,18 @@ export default {
 
       console.log(this.uploadedTicket)
     },
+    openConnectModal() {
+      this.showConnectModal = true
+    },
     async connectWallet() {
       try {
         console.log('connectWallet')
-
         const { address, chainId } = await this.$store.dispatch('checkProvider')
         console.log(address, chainId)
 
         if (address) {
           this.step = 2
+          this.showConnectModal = false
         }
       } catch (error) {
         console.log('error connecting', error.message)

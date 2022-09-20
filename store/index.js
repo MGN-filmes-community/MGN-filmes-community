@@ -18,7 +18,7 @@ export const mutations = {
 
 export const actions = {
   async fetchAccount({ commit }, provider) {
-    const accounts = await provider.request({ method: 'eth_accounts' })
+    const accounts = await provider.request({ method: 'eth_requestAccounts' })
 
     if (accounts.length === 0) {
       // MetaMask is locked or the user has not connected any accounts
@@ -63,7 +63,7 @@ export const actions = {
 
     console.log(chainId)
 
-    if (chainId !== '0x89') throw new Error('WRONG_NETWORK')
+    // if (chainId !== '0x89') throw new Error('WRONG_NETWORK')
 
     return { address, chainId }
   },

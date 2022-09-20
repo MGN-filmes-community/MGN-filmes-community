@@ -1,6 +1,15 @@
 #!/bin/bash
 
-build_folder=dist
+while getopts r:b: flag
+do
+    case "${flag}" in
+        r) remote=${OPTARG};;
+        b) build_folder=${OPTARG};;
+    esac
+done
+echo "Origin remote: $remote";
+echo "Build folder: $build_folder";
+
 echo " `date` : Build Project!"
 
 echo " `date` : Create Branch gh-pages"
@@ -17,7 +26,7 @@ git --work-tree $build_folder add --all
 git --work-tree $build_folder commit -m gh-pages
 
 # push branch gh-pages
-git push origin HEAD:gh-pages --force
+git push $remote HEAD:gh-pages --force
 
 # rm -f $build_folder
 

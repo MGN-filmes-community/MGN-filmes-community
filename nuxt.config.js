@@ -1,6 +1,6 @@
 // import colors from 'vuetify/es5/util/colors'
 
-const routerBase = process.env.NODE_ENV === 'production' ? '/mgn-website/' : '/'
+const routerBase = process.env.NODE_ENV === 'production' ? '/' : '/'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
