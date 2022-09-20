@@ -781,7 +781,7 @@ export default {
     display: inline;
     position: absolute;
     bottom: 80px;
-    right: 20%;
+    right: 60px;
   }
 }
 .carousel-card.v-card {
