@@ -149,7 +149,11 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
 
   .modal-body {
-    padding: 88px;
+    padding: 24px;
+
+    @media screen and (min-width: 1024px) {
+      padding: 88px;
+    }
     position: relative;
   }
 

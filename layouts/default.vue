@@ -63,7 +63,13 @@
         </li>
       </nav-bar-menu>
       <div class="box hidden-sm-and-up">
-        <button class="hamburger-menu" @click="showNav = true">&#9776;</button>
+        <button
+          class="hamburger-menu"
+          style="font-size: 24px"
+          @click="showNav = true"
+        >
+          &#9776;
+        </button>
       </div>
     </v-app-bar>
     <v-main>
@@ -73,7 +79,7 @@
     </v-main>
     <v-footer>
       <v-container>
-        <v-row justify="space-between">
+        <v-row justify="space-between" class="flex-nowrap">
           <MgnFooterLogo />
           <div class="d-none d-sm-flex justify-center grow">
             <nuxt-link class="header-link" :to="{ path: '', hash: '#team' }"
