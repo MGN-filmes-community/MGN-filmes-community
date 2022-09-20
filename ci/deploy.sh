@@ -21,6 +21,8 @@ echo " `date` : Install and generate"
 # npm install
 npm run generate
 
+mv CNAME $build_folder
+
 # commit changes on branch gh-pages
 git --work-tree $build_folder add --all
 git --work-tree $build_folder commit -m gh-pages
