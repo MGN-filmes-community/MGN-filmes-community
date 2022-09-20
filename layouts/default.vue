@@ -20,11 +20,22 @@
         >
         <v-spacer />
 
-        <nuxt-link :to="{ path: '', hash: '#tokens' }">
-          <v-btn class="action-btn" :ripple="false" color="#242424">
+        <nuxt-link
+          :to="{ path: '', hash: '#tokens' }"
+          style="text-decoration: none"
+        >
+          <v-btn
+            v-if="!account"
+            class="action-btn"
+            :ripple="false"
+            color="#242424"
+          >
             RECEBE MGN TOKENS
             <IconArrowDown class="ml-2"></IconArrowDown>
           </v-btn>
+          <div v-else>
+            <JazzIcon :account="account" :id="'header'"> </JazzIcon>
+          </div>
         </nuxt-link>
       </div>
       <nav-bar-menu v-if="showNav" class="" @close="showNav = false">
@@ -62,9 +73,9 @@
     </v-main>
     <v-footer>
       <v-container>
-        <v-row>
+        <v-row justify="space-between">
           <MgnFooterLogo />
-          <div class="d-none d-sm-flex justify-space-around grow">
+          <div class="d-none d-sm-flex justify-center grow">
             <nuxt-link class="header-link" :to="{ path: '', hash: '#team' }"
               >Quem Somos</nuxt-link
             >
@@ -92,7 +103,7 @@
             Entra na comunidade
           </a>
         </v-row>
-        <v-row class="mt-10">
+        <v-row class="mt-5">
           <v-col class="text-center white--text">
             {{ new Date().getFullYear() }} &copy; MGN Filmes Community - All
             rights reserved
@@ -104,6 +115,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import MgnFooterLogo from '../assets/svg/mgn-footer-logo.vue'
 import IconDiscord from '../assets/svg/icon-discord.vue'
 import MgnLogo from '~/assets/svg/mgn-logo.vue'
@@ -114,6 +127,9 @@ export default {
   components: { MgnLogo, IconArrowDown, MgnFooterLogo, IconDiscord },
   data() {
     return { showNav: false }
+  },
+  computed: {
+    ...mapState(['account']),
   },
 }
 </script>
@@ -151,7 +167,9 @@ export default {
     }
   }
   .v-footer {
-    padding: 40px 100px 60px;
+    @media screen and (min-width: 1024px) {
+      padding: 32px 100px 50px;
+    }
     background-color: #242424;
     .container {
       max-width: 1262px;
