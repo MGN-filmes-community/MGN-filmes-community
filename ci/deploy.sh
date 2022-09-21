@@ -30,9 +30,9 @@ echo " `date` : Create Branch gh-pages"
 
 git checkout --orphan gh-pages
 
-echo " `date` : Test if branch was created"
 BRANCH="$(git symbolic-ref HEAD)"
-if [[ "$BRANCH" != "gh-pages" ]]; then
+echo " `date` : Test if branch was created $BRANCH"
+if [[ "$BRANCH" != "refs/heads/gh-pages" ]]; then
   echo 'Aborting script';
   exit 1;
 fi
