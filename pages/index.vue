@@ -19,7 +19,7 @@
       <v-col cols="12" class="pa-0">
         <OwlCarousel v-bind="settings">
           <div
-            v-for="i in 21"
+            v-for="i in 20"
             :key="i"
             :style="{
               width: $vuetify.breakpoint.smAndDown
