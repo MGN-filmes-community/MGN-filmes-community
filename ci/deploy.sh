@@ -1,4 +1,18 @@
 #!/bin/bash
+abort()
+{
+    echo >&2 '
+***************
+*** ABORTED ***
+***************
+'
+    echo "An error occurred. Exiting..." >&2
+    exit 1
+}
+
+trap 'abort' 0
+
+set -e
 
 while getopts r:b: flag
 do
@@ -15,6 +29,15 @@ echo " `date` : Build Project!"
 echo " `date` : Create Branch gh-pages"
 
 git checkout --orphan gh-pages
+
+echo " `date` : Test if branch was created"
+BRANCH="$(git symbolic-ref HEAD)"
+if [[ "$BRANCH" != "gh-pages" ]]; then
+  echo 'Aborting script';
+  exit 1;
+fi
+
+echo 'Do stuff';
 
 echo " `date` : Install and generate"
 
@@ -34,3 +57,11 @@ git push $remote HEAD:gh-pages --force
 
 git checkout -f main
 git branch -D gh-pages
+
+trap : 0
+
+echo >&2 '
+************
+*** DONE *** 
+************
+'
