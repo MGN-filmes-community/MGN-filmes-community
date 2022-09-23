@@ -316,11 +316,11 @@
           class="card text-left"
         >
           <v-card class="border-card d-flex pa-4">
-            <img
-              class="mr-4"
+            <v-img
+              class="mr-4 member-photo v-avatar"
               alt="Member photo"
               max-width="100"
-              :src="`member-photos/member (${0}).webp`"
+              :src="`member-photos/${member.photo}`"
             />
 
             <div class="d-flex flex-column justify-center">
@@ -515,6 +515,8 @@ import IconPlay from '~/assets/svg/icon-play.vue'
 import VideoPlayerModal from '~/modals/video-player-modal.vue'
 import ConnectModal from '~/modals/connect-modal.vue'
 
+import communityMembers from '~/static/members.json'
+
 export default {
   name: 'IndexPage',
   components: {
@@ -532,24 +534,7 @@ export default {
 
   data() {
     return {
-      communityMembers: [
-        {
-          name: 'Filipe Veiga',
-          role: 'Espectador de cinema',
-        },
-        {
-          name: 'Filipe Veiga',
-          role: 'Espectador de cinema',
-        },
-        {
-          name: 'Filipe Veiga',
-          role: 'Espectador de cinema',
-        },
-        {
-          name: 'Filipe Veiga',
-          role: 'Espectador de cinema',
-        },
-      ],
+      communityMembers,
       uploadedTicket: null,
       uploadedTicketName: 'Nenhum ficheiro selecionado',
       location: null,
@@ -841,6 +826,16 @@ export default {
   .card > div:first-child {
     height: 100%;
     background-image: linear-gradient(49deg, #faf4ec 3%, #dad6f1 91%);
+  }
+}
+
+.section5-5 {
+  .member-photo {
+    border-radius: 50%;
+    height: 84px;
+    max-height: 84px;
+    width: 84px;
+    max-width: 84px !important;
   }
 }
 .section6 {
