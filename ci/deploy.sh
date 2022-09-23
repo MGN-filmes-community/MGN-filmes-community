@@ -14,6 +14,10 @@ trap 'abort' 0
 
 set -e
 
+# default values
+remote=org
+build_folder=dist
+
 while getopts r:b: flag
 do
     case "${flag}" in
