@@ -400,7 +400,7 @@
               </p>
             </div>
             <div v-else>
-              <JazzIcon :account="account" :id="'form'"> </JazzIcon>
+              <JazzIcon :id-name="'form'" :account="account"> </JazzIcon>
             </div>
           </div>
           <div class="d-flex pt-10">

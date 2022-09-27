@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="auto" class="px-0">
         <div
-          :id="'jazzicon-' + id"
+          :id="'jazzicon-' + idName"
           :style="{
             width: size + 'px',
             height: size + 'px',
@@ -26,7 +26,7 @@ export default {
       type: String,
       default: '',
     },
-    id: {
+    idName: {
       type: String,
       required: true,
     },
@@ -39,12 +39,12 @@ export default {
   watch: {
     address(value) {
       if (value) {
-        this.setIconWallet(this.size, this.id, this.account)
+        this.setIconWallet(this.size, this.idName, this.account)
       }
     },
   },
   mounted() {
-    this.setIconWallet(this.size, this.id, this.account)
+    this.setIconWallet(this.size, this.idName, this.account)
   },
   methods: {
     setIconWallet(size, id, account) {

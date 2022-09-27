@@ -40,7 +40,7 @@
                   <h4>{{ state }}</h4>
                 </v-col>
 
-                <v-col cols="12" sm="8">
+                <v-col v-if="!isSafari" cols="12" sm="8">
                   <p class="normal-text text-center">
                     Não tens uma carteira digital?
                     <a
@@ -51,6 +51,20 @@
                       @click="startOnboarding()"
                     >
                       Instala aqui
+                    </a>
+                  </p>
+                </v-col>
+                <v-col v-else cols="12" lg="9" md="8" sm="7">
+                  <p class="normal-text text-center">
+                    Este browser não é compatível com a carteira digital
+                    MetaMask. Por favor descarregue o
+                    <a
+                      href="https://www.google.com/intl/pt-PT/chrome/"
+                      target="_blank"
+                      class="link"
+                      style="color: #8888fd"
+                    >
+                      Chrome
                     </a>
                   </p>
                 </v-col>
@@ -75,10 +89,16 @@ export default {
   data() {
     return {
       state: 'MetaMask',
+      isSafari: false,
     }
   },
-  created() {
-    // this.loadingTask();
+  mounted() {
+    this.isSafari =
+      navigator.vendor &&
+      navigator.vendor.includes('Apple') > -1 &&
+      navigator.userAgent &&
+      navigator.userAgent.includes('CriOS') === -1 &&
+      navigator.userAgent.includes('FxiOS') === -1
   },
 
   methods: {
