@@ -24,6 +24,7 @@
                 </v-col>
 
                 <v-col
+                  v-if="!isSafari"
                   cols="12"
                   sm="9"
                   class="d-flex align-center justify-start switch-network-card mb-16 px-11 py-4"
