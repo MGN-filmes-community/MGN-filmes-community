@@ -19,8 +19,28 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Fundada em 1987 por Tino Navarro a MGN Filmes produziu ou co-produziu 42 longas metragens. Os filmes da MGN fizeram mais de 6 milhões de espectadores em salas cinema, dos quais 1.987.356 em Portugal, foram um enorme sucesso em home vídeo e em televisão e ganharam 76 Prémios, entre os quais 17 Globos de Ouro e 20 Prémios Sophia em Portugal, 6 Prémios Goya em Espanha, 3 Prémios do Cinema Brasileiro no Brasil.',
+      },
       { name: 'format-detection', content: 'telephone=no' },
+
+      { hid: 'og-type', property: 'og:type', content: 'website' },
+      { hid: 'og-type', property: 'og:type', content: 'MGN Filmes Community' },
+      {
+        hid: 'og-image',
+        property: 'og:image',
+        content:
+          'https://raw.githubusercontent.com/MGN-filmes-community/MGN-filmes-community.github.io/main/assets/images/mgn-logo.webp',
+      },
+      {
+        hid: 'og-desc',
+        property: 'og:description',
+        content:
+          'Fundada em 1987 por Tino Navarro a MGN Filmes produziu ou co-produziu 42 longas metragens. Os filmes da MGN fizeram mais de 6 milhões de espectadores em salas cinema, dos quais 1.987.356 em Portugal, foram um enorme sucesso em home vídeo e em televisão e ganharam 76 Prémios, entre os quais 17 Globos de Ouro e 20 Prémios Sophia em Portugal, 6 Prémios Goya em Espanha, 3 Prémios do Cinema Brasileiro no Brasil.',
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
   },
