@@ -209,14 +209,13 @@
             utilização de iniciativas offline e online, bem como de ferramentas
             da Web3.
           </p>
-          <a
-            href=""
-            target="_blank"
+          <span
             class="white--text link"
+            style="cursor: pointer"
             @click="downloadFile('/litepaper.pdf')"
             >Sabe mais sobre a Comunidade MGN
             <IconArrowForward></IconArrowForward>
-          </a>
+          </span>
         </v-col>
         <v-col cols="12" sm="6" md="6" class="topics px-sm-8">
           <h4 class="white--text font-weight-bold">
@@ -463,14 +462,12 @@
             </div>
             <p class="normal-text">
               Sabe mais sobre os MGN tokens no nosso LitePaper. Descarrega
-              <a
-                href=""
-                target="_blank"
+              <span
                 class="link"
-                style="color: #8888fd"
+                style="color: #8888fd; cursor: pointer"
                 @click="downloadFile('/litepaper.pdf')"
               >
-                aqui</a
+                aqui</span
               >.
             </p>
           </v-card>
