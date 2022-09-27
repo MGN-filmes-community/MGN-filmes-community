@@ -95,11 +95,12 @@ export default {
   },
   mounted() {
     this.isSafari =
-      navigator.vendor &&
-      navigator.vendor.includes('Apple') > -1 &&
-      navigator.userAgent &&
-      navigator.userAgent.includes('CriOS') === -1 &&
-      navigator.userAgent.includes('FxiOS') === -1
+      (navigator.vendor &&
+        navigator.vendor.includes('Apple') > -1 &&
+        navigator.userAgent &&
+        navigator.userAgent.includes('CriOS') === -1 &&
+        navigator.userAgent.includes('FxiOS') === -1) ||
+      /apple/i.test(navigator.vendor)
   },
 
   methods: {
