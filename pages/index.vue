@@ -378,7 +378,7 @@
             <h4>Conecta à tua carteira digital</h4>
           </div>
           <div class="pl-11 pt-5">
-            <div v-if="!account" class="d-flex">
+            <div v-if="!account" class="d-flex flex-wrap">
               <v-btn
                 class="action-btn inverse mb-5 mr-5 mt-2"
                 :ripple="false"
@@ -515,7 +515,7 @@ import IconPlay from '~/assets/svg/icon-play.vue'
 import VideoPlayerModal from '~/modals/video-player-modal.vue'
 import ConnectModal from '~/modals/connect-modal.vue'
 
-import communityMembers from '~/static/members.json'
+// import communityMembers from '~/static/members.json'
 
 export default {
   name: 'IndexPage',
@@ -534,7 +534,7 @@ export default {
 
   data() {
     return {
-      communityMembers,
+      communityMembers: [],
       uploadedTicket: null,
       uploadedTicketName: 'Nenhum ficheiro selecionado',
       location: null,
@@ -585,12 +585,21 @@ export default {
       return !(this.location && this.account)
     },
   },
-  mounted() {
+  async mounted() {
     const now = new Date()
 
     const distance = new Date(this.premierDate) - now
     if (distance < 0) {
       this.hasBeenReleased = true
+    }
+
+    // Load members data
+
+    try {
+      const { data: communityMembers } = await this.$axios.get('/members.json')
+      this.communityMembers = communityMembers
+    } catch (error) {
+      console.error('Error getting data', error?.message || error)
     }
   },
   methods: {
