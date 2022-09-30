@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Joana Metrass",
+    "role": "Actriz",
+    "photo": "joana-m.jpeg"
+  },
+  {
+    "name": "João Maia",
+    "role": "Realizador",
+    "photo": "joao-m.jpeg"
+  },
+  {
+    "name": "Pedro Ribeiro",
+    "role": "Montador",
+    "photo": "pedro-r.jpeg"
+  },
+  {
+    "name": "Sandra Alves",
+    "role": "Diretora de Produção",
+    "photo": "sandra-a.jpeg"
+  }
+]
