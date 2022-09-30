@@ -170,7 +170,7 @@ export default {
     },
     async connectWallet() {
       try {
-        this.state = 'A connectar...'
+        this.state = 'A conectar...'
         console.log('connectWallet')
         const { address, chainId } = await this.$store.dispatch('checkProvider')
         console.log(address, chainId)
