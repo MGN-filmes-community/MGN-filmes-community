@@ -18,5 +18,25 @@
     "name": "Sandra Alves",
     "role": "Diretora de Produção",
     "photo": "sandra-a.jpeg"
+  },
+  {
+    "name": "Filipa Ruiz",
+    "role": "Assistente de Realização",
+    "photo": "filiparuiz.jpeg"
+  },
+  {
+    "name": "Cláudio Andrade",
+    "role": "Diretor de Arte",
+    "photo": "claudioandrade.jpeg"
+  },
+  {
+    "name": "Vasco Pedroso",
+    "role": "Diretor de Som",
+    "photo": "vascopedroso.png"
+  },
+  {
+    "name": "Inês Ferreira",
+    "role": "Aderecista",
+    "photo": "inesferreira.jpeg"
   }
 ]
